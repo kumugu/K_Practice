@@ -1,82 +1,16 @@
-이 오류는 updateGame 함수에서 canvas 변수를 참조할 때, 해당 변수가 정의되지 않았기 때문에 발생합니다.
+ **오류**<br/>updateGame 함수에서 canvas 변수를 참조할 때, 해당 변수가 정의되지 않던 문제
 
-원인
-canvas는 DOMContentLoaded 이벤트 안에서만 정의되어 있어서, 함수 외부에서 접근할 수 없습니다. 이를 해결하려면 canvas 변수를 전역으로 선언하여 모든 함수에서 접근할 수 있도록 해야 합니다.
+**원인**
+canvas는 DOMContentLoaded 이벤트 안에서만 정의되어 있어서, 함수 외부에서 접근할 수 없음. <br/>이를 해결하려면 canvas 변수를 전역으로 선언하여 모든 함수에서 접근할 수 있도록 해야함.
 
-해결 방법
-canvas 변수를 전역 변수로 선언합니다.
-DOMContentLoaded 이벤트 내부에서 전역 변수에 값을 할당합니다.
-수정된 코드 예시
-javascript
-코드 복사
-const rows = 20; 
-const cols = 10; 
-const blockSize = 30; 
-let tetrominoY = 0;
-const dropInterval = 500;
-let ctx;
-let canvas; // 전역 변수로 선언
-
-const tetromino = [
-    [1, 1, 1, 1]
-];
-
-document.addEventListener("DOMContentLoaded", () => {
-    canvas = document.getElementById("gameCanvas"); // 전역 변수에 할당
-    ctx = canvas.getContext("2d");
-
-    drawGrid(); 
-
-    setInterval(() => {
-        updateGame();
-    }, dropInterval);
-});
-
-function drawGrid() {
-    if (!ctx) return;
-
-    ctx.strokeStyle = "gray";
-    for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-            ctx.strokeRect(col * blockSize, row * blockSize, blockSize, blockSize); 
-        }
-    }
-}
-
-function drawTetromino() {
-    if (!ctx) return;
-
-    const x = 3; 
-    const y = tetrominoY;
-
-    for (let row = 0; row < tetromino.length; row++) {
-        for (let col = 0; col < tetromino[row].length; col++) {
-            if (tetromino[row][col] === 1) {
-                ctx.fillStyle = "cyan";
-                ctx.fillRect((x + col) * blockSize, (y + row) * blockSize, blockSize, blockSize);
-            }
-        }
-    }
-}
-
-function updateGame() {
-    tetrominoY++;
-
-    if (tetrominoY >= rows) {
-        tetrominoY = rows - 1; 
-    }
-
-    // canvas 변수가 전역으로 선언되어 정상적으로 참조됨
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawGrid(); 
-    drawTetromino(); 
-}
-이제 canvas 변수가 전역으로 선언되어, updateGame 함수에서도 정상적으로 접근할 수 있습니다. 수정 후 코드가 잘 동작하는지 확인해보세요. 추가적인 오류가 발생하거나 더 궁금한 점이 있으면 말씀해주세요!
+**해결 방법**<br/>
+canvas 변수를 전역 변수로 선언.
+DOMContentLoaded 이벤트 내부에서 전역 변수에 값을 할당함.
 
 
 
 ----
-이 오류는 canvas가 아직 제대로 할당되지 않았거나 canvas 변수가 undefined일 때 canvas.width를 읽으려 해서 발생합니다.
+위와 같은 형태로 수정 하였으나 canvas 변수가 undefined일 때 canvas.width를 읽으려 해서 발생합니다.
 
 원인
 canvas 변수가 전역으로 선언되었지만, updateGame 함수가 실행될 때 canvas가 제대로 초기화되지 않은 상태일 수 있습니다. 특히 setInterval이 실행되기 전에 canvas가 아직 할당되지 않으면 이런 오류가 발생할 수 있습니다.
@@ -92,11 +26,11 @@ function updateGame() {
     if (!canvas || !ctx) return;
 
     tetrominoY++;
-
+    
     if (tetrominoY >= rows) {
         tetrominoY = rows - 1; 
     }
-
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(); 
     drawTetromino(); 
@@ -131,7 +65,7 @@ function drawTetromino() {
 
     const x = 3; // 블럭이 캔버스 안에 있는 열 위치
     const y = tetrominoY; // 현재 블럭의 행 위치
-
+    
     // tetromino 배열을 순회하며 각 칸을 그림
     for (let row = 0; row < tetromino.length; row++) {
         for (let col = 0; col < tetromino[row].length; col++) {
@@ -151,12 +85,12 @@ function updateGame() {
     if (!canvas || !ctx) return;
 
     tetrominoY++;
-
+    
     // tetrominoY가 행의 수를 초과하지 않도록 제한
     if (tetrominoY >= rows - tetromino.length) {
         tetrominoY = rows - tetromino.length; 
     }
-
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(); 
     drawTetromino(); 
@@ -249,7 +183,7 @@ function drawTetromino() {
     // 테트로미노를 특정 위치(x,y)에 표시하기 위한 변수 설정
     const x = 3; // 블럭이 캔버스 안에 있는 열 위치
     const y = tetrominoY; // 현재 블럭의 행 위치
-
+    
     // 반복문을 사용하여 테트로미노의 각 칸을 순회
     for (let row = 0; row < tetromino.length; row++) {
         for (let col = 0; col < tetromino[row].length; col++) {
@@ -266,12 +200,12 @@ function updateGame() {
 
     // 테트로미노의 Y 위치를 한 칸 아래로 이동
     tetrominoY++;
-
+    
     // 테트로미노가 바닥에 도달했는지 확인
     if (tetrominoY >= rows - tetromino.length) {
         tetrominoY = rows - tetromino.length; 
     }
-
+    
     // 기존 화면을 지우고 새로 그리기
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawGrid(); 
