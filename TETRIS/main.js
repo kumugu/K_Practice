@@ -119,7 +119,7 @@ function drawGrid() {
             ctx.strokeRect(col * blockSize, row * blockSize, blockSize, blockSize); 
         }
     }
-}
+ }
 
 
 // 테트로미노 그리기 함수
