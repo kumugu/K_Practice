@@ -1,7 +1,6 @@
 package exam;
 
 import java.awt.CardLayout;
-
 import javax.swing.*;
 
 public class MainFrame extends JFrame{
@@ -13,6 +12,7 @@ public class MainFrame extends JFrame{
 		cardLayout = new CardLayout();
 		cardPanel = new JPanel(cardLayout);
 		
+		cardPanel.add(new LoginPanel(this), "login");
 		cardPanel.add(new MenuPanel(this),"menu");
 		cardPanel.add(new SignupPanel(this),"signup");
 		cardPanel.add(new AccountCheckPanel(this),"accountChek");
@@ -20,7 +20,7 @@ public class MainFrame extends JFrame{
 		cardPanel.add(new WithdrawPanel(this),"withdraw");
 		
 		add(cardPanel);
-		setSize(400, 300);
+		setSize(500, 400);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 	}

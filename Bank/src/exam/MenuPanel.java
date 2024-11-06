@@ -8,18 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class MenuPanel extends JPanel{
-
 	public MenuPanel(MainFrame mainFrame) {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		JButton signupButton = new JButton("회원가입");
-		signupButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-		signupButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mainFrame.showCard("signup");
-			}
-		});
 		
 		JButton accountCheckButton = new JButton("계좌조회");
 		accountCheckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -57,8 +47,6 @@ public class MenuPanel extends JPanel{
 		});
 		
 		add(Box.createHorizontalGlue());
-		add(signupButton);
-		add(Box.createRigidArea(new Dimension(0, 10)));
 		add(accountCheckButton);
 		add(Box.createRigidArea(new Dimension(0, 10)));
 		add(depositButton);
