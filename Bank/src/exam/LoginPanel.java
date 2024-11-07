@@ -3,6 +3,10 @@ package exam;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import javax.swing.*;
 
 public class LoginPanel extends JPanel {
@@ -19,25 +23,65 @@ public class LoginPanel extends JPanel {
         idLabel.setForeground(new Color(245,245,220));
         JTextField idField = new JTextField(15);
         idField.setMaximumSize(new Dimension(200, 30));
+
         JLabel pwLabel = new JLabel("PW");
         pwLabel.setForeground(new Color(245,245,220));
-        JPasswordField pwField = new JPasswordField(15);  // JPasswordField로 변경
+        JPasswordField pwField = new JPasswordField(15); 
         pwField.setMaximumSize(new Dimension(200, 30));
 
         JButton loginButton = new JButton("Login");
         loginButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        loginButton.addActionListener(new ActionListener() {
+
+        ActionListener logActionListener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String id = idField.getText();
                 String password = new String(pwField.getPassword());
 
-                if (id.equals("user") && password.equals("password")) {
+                if (authenticateUser(id, password)) {
                     mainFrame.showCard("menu");
                 } else {
                     JOptionPane.showMessageDialog(mainFrame, "login failed");
                 }
             }
-        });
+
+            private boolean authenticateUser(String id, String password) {
+                return authenticateFromCSV(id, password) || authenticateFromTXT(id, password);
+            }
+
+            private boolean authenticateFromCSV(String id, String password) {
+                try (BufferedReader br = new BufferedReader(new FileReader("user.csv"))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        String[] userDetails = line.split(",");
+                        if (userDetails.length == 2 && userDetails[0].equals(id) && userDetails[1].equals(password)) {
+                            return true;
+                        }
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                return false;
+            }
+
+            private boolean authenticateFromTXT(String id, String password) {
+                try (BufferedReader br = new BufferedReader(new FileReader("users.txt"))) {
+                    String line;
+                    while ((line = br.readLine()) != null) {
+                        String[] userDetails = line.split(",");
+                        if (userDetails.length == 2 && userDetails[0].equals(id) && userDetails[1].equals(password)) {
+                            return true;
+                        }
+                    }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                return false;
+            }
+        };
+
+        loginButton.addActionListener(logActionListener);
+        idField.addActionListener(logActionListener);
+        pwField.addActionListener(logActionListener);
 
         JLabel signupLabel = new JLabel("join");
         signupLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -46,6 +90,15 @@ public class LoginPanel extends JPanel {
         signupLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent event) {
                 mainFrame.showCard("signup");
+            }
+        });
+
+        JLabel exitJLabel = new JLabel("Exit");
+        exitJLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        exitJLabel.setForeground(new Color(245,245,220));
+        exitJLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent event) {
+                System.exit(0);
             }
         });
 
