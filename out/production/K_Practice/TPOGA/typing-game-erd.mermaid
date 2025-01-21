@@ -1,0 +1,106 @@
+erDiagram
+    users ||--o{ game_sessions : "plays"
+    users ||--o{ user_logs : "generates"
+    users ||--o{ multiplayer_participants : "participates"
+    multiplayer_sessions ||--o{ multiplayer_participants : "contains"
+    words ||--o{ game_sessions : "used_in"
+
+    users {
+        bigint user_id PK
+        string nickname
+        string email
+        string profile
+        datetime created_at
+        datetime last_login
+    }
+
+    words {
+        bigint word_id PK
+        string content
+        int difficulty
+        string category
+        datetime created_at
+    }
+
+    game_sessions {
+        bigint session_id PK
+        bigint user_id FK
+        int score
+        float accuracy
+        int words_completed
+        datetime created_at
+    }
+
+    multiplayer_sessions {
+        bigint room_id PK
+        bigint host_user_id FK
+        string status
+        datetime created_at
+    }
+
+    multiplayer_participants {
+        bigint room_id FK
+        bigint user_id FK
+        int score
+        string status
+    }
+
+    user_logs {
+        bigint log_id PK
+        bigint user_id FK
+        string action
+        datetime created_at
+    }
+erDiagram
+    users ||--o{ game_sessions : "plays"
+    users ||--o{ user_logs : "generates"
+    users ||--o{ multiplayer_participants : "participates"
+    multiplayer_sessions ||--o{ multiplayer_participants : "contains"
+    words ||--o{ game_sessions : "used_in"
+
+    users {
+        bigint user_id PK
+        string nickname
+        string email
+        string profile
+        datetime created_at
+        datetime last_login
+    }
+
+    words {
+        bigint word_id PK
+        string content
+        int difficulty
+        string category
+        datetime created_at
+    }
+
+    game_sessions {
+        bigint session_id PK
+        bigint user_id FK
+        int score
+        float accuracy
+        int words_completed
+        datetime created_at
+    }
+
+    multiplayer_sessions {
+        bigint room_id PK
+        bigint host_user_id FK
+        string status
+        datetime created_at
+    }
+
+    multiplayer_participants {
+        bigint room_id FK
+        bigint user_id FK
+        int score
+        string status
+    }
+
+    user_logs {
+        bigint log_id PK
+        bigint user_id FK
+        string action
+        datetime created_at
+    }

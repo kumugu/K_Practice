@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        List<int> numbers = new List<int>();
+        string input;
+        
+        Console.WriteLine("숫자를 입력하세요. 종료하려면 '끝'을 입력하세요.");
+        
+        while (true)
+        {
+            Console.Write("숫자: ");
+            input = Console.ReadLine();
+            
+            if (input.ToLower() == "끝")
+                break;
+            
+            if (int.TryParse(input, out int number))
+            {
+                numbers.Add(number);
+            }
+            else
+            {
+                Console.WriteLine("유효한 숫자를 입력하세요.");
+            }
+        }
+        
+        if (numbers.Count > 0)
+        {
+            int sum = 0;
+            foreach (int num in numbers)
+            {
+                sum += num;
+            }
+            
+            double average = (double)sum / numbers.Count;
+            
+            Console.WriteLine($"합계: {sum}");
+            Console.WriteLine($"평균: {average}");
+        }
+        else
+        {
+            Console.WriteLine("입력된 숫자가 없습니다.");
+        }
+    }
+}

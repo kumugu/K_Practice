@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Lobby</title>
+    <style>
+                /* 공통 스타일 */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            display: flex;
+            height: calc(100vh - 50px); /* 헤더 높이를 제외한 전체 높이 */
+        }
+
+        /* 헤더 */
+        .header {
+            height: 50px;
+            background-color: #333;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        /* 좌측 메뉴 */
+        .sidebar {
+            width: 20%;
+            background-color: #444;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .menu-item {
+            background-color: #555;
+            margin: 10px 0;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* 중앙 콘텐츠 */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 우측 위젯 */
+        .right-widget {
+            width: 20%;
+            background-color: #ddd;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .widget-item {
+            background-color: #bbb;
+            margin: 10px 0;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        /* 하단 버튼 */
+        .footer {
+            height: 50px;
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .action-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="header">
+        <div class="logo">Game Lobby</div>
+    </header>
+    
+    <div class="container">
+        <!-- 좌측 메뉴 -->
+        <aside class="sidebar">
+            <div class="menu-item">Menu 1</div>
+            <div class="menu-item">Menu 2</div>
+            <div class="menu-item">Menu 3</div>
+            <div class="menu-item">Menu 4</div>
+            <div class="menu-item">Menu 5</div>
+        </aside>
+        
+        <!-- 중앙 메인 콘텐츠 -->
+        <main class="main-content">
+            <h1>Main Content</h1>
+            <p>Welcome to the game lobby!</p>
+        </main>
+        
+        <!-- 우측 위젯 -->
+        <aside class="right-widget">
+            <div class="widget-item">Widget 1</div>
+            <div class="widget-item">Widget 2</div>
+        </aside>
+    </div>
+    
+    <!-- 하단 버튼 -->
+    <footer class="footer">
+        <button class="action-button">Action</button>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

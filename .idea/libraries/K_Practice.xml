@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="K_Practice">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/ojdbc8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/test3.zip!/" />
+      <root url="jar://$PROJECT_DIR$/test2.zip!/" />
+      <root url="jar://$PROJECT_DIR$/12_16workspace(jsp).zip!/" />
+      <root url="jar://$PROJECT_DIR$/proto(로그인 회원가입 틀까지만).zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
